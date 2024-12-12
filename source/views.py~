@@ -129,9 +129,9 @@ def register_view(request):
 def siem_test_connect(request):
     if request.method == 'POST':
         # API'ye yapılacak istek için URL
-
         login_url = "https://10.0.3.82/rs/esm/login"
 
+        print(request.POST)
         # username = request.POST.get("siem_username")
         # password = request.POST.get("siem_password")
         #
@@ -143,7 +143,7 @@ def siem_test_connect(request):
             "password": "RggsNVNjVUhtNi16RzJd0yuhcmE4Sg==",
             "locale": "en_US"
         }
-
+        #
         # login_payload = {
         #     "username": encoded_username,
         #     "password": encoded_password,
@@ -151,11 +151,19 @@ def siem_test_connect(request):
         # }
 
         # Disable SSL verification for the login request
-        login_response = requests.post(login_url, json=login_payload, verify=False)
-        print(login_response)
+        # login_response = requests.post(login_url, json=login_payload, verify=False)
+        # print(login_response)
+        #
+        # # Eğer istek başarılıysa (200 OK), 2.isteği at
+        # if login_response.status_code == 200 or login_response.status_code == 201:
+        #     # data = login_response.json()
+        #     # print(data)
+        #
+        #     return JsonResponse({"message": "Connection successful","status": True})
+        # else:
+        #     return JsonResponse({"message": "Connection failed!.","status": False})
 
-        # Eğer istek başarılıysa (200 OK), 2.isteği at
-        if login_response.status_code == 200 or login_response.status_code == 201:
-            return JsonResponse({"message": "Connection successful","status": True})
-        else:
-            return JsonResponse({"message": "Connection failed!.","status": False})
+        return JsonResponse({"message": "Connection successful!.", "status": True})
+
+    if request.method == 'GET':
+        return JsonResponse({"message": "Connection failed!.", "status": False})

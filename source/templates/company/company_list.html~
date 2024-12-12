@@ -11,7 +11,7 @@
             <i class="bi bi-plus"></i> Add</a></li>
     </div>
 
-<table class="table table-hover table-striped table-secondary">
+<table class="table table-hover table-striped">
     <thead>
         <tr>
             <th>Company Name</th>
@@ -68,9 +68,9 @@
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
- <form method="POST" id="company-update-form">
 
-              <div class="container">
+    <form method="POST" id="company-update-form">
+       <div class="container">
                   <ul class="nav nav-tabs" id="myTab" role="tablist">
                   <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
@@ -84,7 +84,6 @@
                   </li>
             </ul>
               </div>
-
 
         <div class="tab-content" id="myTabContent">
 
@@ -304,11 +303,14 @@
                                 </div>
 
                                   <!-- Test Connect Button -->
-                                <div class="mb-3">
-                                    <div class="form-floating">
-                                        <a href="" type="submit" class="btn btn-primary">Test Connect</a>
-
+                                <div class="mb-3 d-flex">
+                                    <div class="form-floating me-3">
+                                        <a id="test-connect-button" class="btn btn-info">
+                                             Test Connect</a>
                                     </div>
+
+                                  <div id="connection-result" style="margin-top: 10px;"></div>
+
                                 </div>
 
                             </div>
@@ -318,7 +320,9 @@
 
 
         </div>
+
          </form>
+
     </div>
       </div>
 </div>
@@ -348,78 +352,115 @@
 <script>
    document.addEventListener("DOMContentLoaded", function() {
    // Bütün delete linklerini seç
-     const deleteLink = document.getElementById('delete-link');
+    const deleteLink = document.getElementById('delete-link');
 
-    // Tüm tıklanabilir satırları seç
-    const rows = document.querySelectorAll('.clickable-row');
+   // Tüm tıklanabilir satırları seç
+   const rows = document.querySelectorAll('.clickable-row');
 
-    rows.forEach(function(row) {
-        row.addEventListener('click', function() {
-           if (event.target.closest('.delete-btn')) {
-                return;
+   rows.forEach(function(row) {
+       row.addEventListener('click', function() {
+        if (event.target.id === 'test-connect-button' || event.target.closest('#test-connect-button')) {
+        return; // Eğer tıklanan element 'test-connect-button' ise, işlem yapma
+        }
+          // Satırdaki "data-*" verilerini al
+          const companyId = row.getAttribute('data-id');
+          const companyName = row.getAttribute('data-company-name');
+          const notifiedEmailTo = row.getAttribute('data-notified-email-to');
+          const notifiedEmailCc = row.getAttribute('data-notified-email-cc');
+          const notifiedEmailBcc = row.getAttribute('data-notified-email-bcc');
+          const status = row.getAttribute('data-status');
+          const authorizedPerson = row.getAttribute('data-authorized-person');
+          const authorizedPersonEmail = row.getAttribute('data-authorized-person-email');
+          const authorizedPersonMobile = row.getAttribute('data-authorized-person-mobile');
+          const salesManager = row.getAttribute('data-sales-manager');
+          const type = row.getAttribute('data-type');
+          const industry = row.getAttribute('data-industry');
+          const siemProduct = row.getAttribute('data-siem-product');
+          const siemUsername = row.getAttribute('data-siem-username');
+          const siemPassword = row.getAttribute('data-siem-password');
+          const createdBy = row.getAttribute('data-created-by');
+          const createdOn = row.getAttribute('data-created-on');
+
+            // Modal içindeki delete linkini güncelle
+              deleteLink.setAttribute('href', `/company/delete/${companyId}/`);
+
+          // Formdaki inputları güncelle
+          document.getElementById('company_name').value = companyName;
+          document.getElementById('notified_email_to').value = notifiedEmailTo;
+          document.getElementById('notified_email_cc').value = notifiedEmailCc;
+          document.getElementById('notified_email_bcc').value = notifiedEmailBcc;
+          document.getElementById('authorized_person').value = authorizedPerson;
+          document.getElementById('authorized_person_email').value = authorizedPersonEmail;
+          document.getElementById('authorized_person_mobile').value = authorizedPersonMobile;
+          document.getElementById('created_by').value = createdBy;
+          document.getElementById('siem_username').value = siemUsername;
+          document.getElementById('siem_password').value = siemPassword;
+
+
+          document.getElementById('offcanvasExampleLabel').innerHTML = `Company: ${companyName}`;
+          document.getElementById('offcanvasExampleLabel2').innerHTML = `Company - ${companyId} | ${companyName}`;
+          document.getElementById('offcanvasExampleLabel3').innerHTML = `Created By: ${createdBy} - Created On: ${createdOn}`;
+
+          // Select alanları için doğru seçeneği işaretle
+          function selectOptionByValue(selectId, value) {
+              const select = document.getElementById(selectId);
+              const options = select.querySelectorAll('option');
+              options.forEach(function(option) {
+                  if (option.value === value) {
+                      option.selected = true;
+                  }
+              });
+          }
+
+          selectOptionByValue('status', status);
+          selectOptionByValue('corporate_sales_manager', salesManager);
+          selectOptionByValue('type', type);
+          selectOptionByValue('industry', industry);
+          selectOptionByValue('siem_product', siemProduct);
+
+          const updateForm = document.getElementById('company-update-form');
+          updateForm.setAttribute('action', `/company/edit/${companyId}/`);
+
+          // Offcanvas'ı aç
+          const offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasExample'));
+          offcanvas.show();
+
+
+          // Test Connect işlevi buraya gelir
+          const testConnectButton = document.getElementById('test-connect-button')
+           .addEventListener('click', function(event) {
+
+    fetch("/siem-test-connect", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}"
+            },
+            body: JSON.stringify({
+                siem_username: siemUsername,
+                siem_password: siemPassword
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const resultMessage = document.getElementById("connection-result");
+            if (data.status) {
+                resultMessage.textContent = data.message;
+                resultMessage.style.color = "green";
+            } else {
+                resultMessage.textContent = data.message;
+                resultMessage.style.color = "red";
             }
-            // Satırdaki "data-*" verilerini al
-            const companyId = row.getAttribute('data-id');
-            const companyName = row.getAttribute('data-company-name');
-            const notifiedEmailTo = row.getAttribute('data-notified-email-to');
-            const notifiedEmailCc = row.getAttribute('data-notified-email-cc');
-            const notifiedEmailBcc = row.getAttribute('data-notified-email-bcc');
-            const status = row.getAttribute('data-status');
-            const authorizedPerson = row.getAttribute('data-authorized-person');
-            const authorizedPersonEmail = row.getAttribute('data-authorized-person-email');
-            const authorizedPersonMobile = row.getAttribute('data-authorized-person-mobile');
-            const salesManager = row.getAttribute('data-sales-manager');
-            const type = row.getAttribute('data-type');
-            const industry = row.getAttribute('data-industry');
-            const siemProduct = row.getAttribute('data-siem-product');
-            const siemUsername = row.getAttribute('data-siem-username');
-            const siemPassword = row.getAttribute('data-siem-password');
-            const createdBy = row.getAttribute('data-created-by');
-            const createdOn = row.getAttribute('data-created-on');
-
-              // Modal içindeki delete linkini güncelle
-                deleteLink.setAttribute('href', `/company/delete/${companyId}/`);
-
-            // Formdaki inputları güncelle
-            document.getElementById('company_name').value = companyName;
-            document.getElementById('notified_email_to').value = notifiedEmailTo;
-            document.getElementById('notified_email_cc').value = notifiedEmailCc;
-            document.getElementById('notified_email_bcc').value = notifiedEmailBcc;
-            document.getElementById('authorized_person').value = authorizedPerson;
-            document.getElementById('authorized_person_email').value = authorizedPersonEmail;
-            document.getElementById('authorized_person_mobile').value = authorizedPersonMobile;
-            document.getElementById('created_by').value = createdBy;
-            document.getElementById('siem_username').value = siemUsername;
-            document.getElementById('siem_password').value = siemPassword;
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            const resultMessage = document.getElementById("connection-result");
+            resultMessage.textContent = "An error occurred";
+            resultMessage.style.color = "red";
+        });
 
 
-            document.getElementById('offcanvasExampleLabel').innerHTML = `Company: ${companyName}`;
-            document.getElementById('offcanvasExampleLabel2').innerHTML = `Company - ${companyId} | ${companyName}`;
-            document.getElementById('offcanvasExampleLabel3').innerHTML = `Created By: ${createdBy} - Created On: ${createdOn}`;
-
-            // Select alanları için doğru seçeneği işaretle
-            function selectOptionByValue(selectId, value) {
-                const select = document.getElementById(selectId);
-                const options = select.querySelectorAll('option');
-                options.forEach(function(option) {
-                    if (option.value === value) {
-                        option.selected = true;
-                    }
-                });
-            }
-
-            selectOptionByValue('status', status);
-            selectOptionByValue('corporate_sales_manager', salesManager);
-            selectOptionByValue('type', type);
-            selectOptionByValue('industry', industry);
-            selectOptionByValue('siem_product', siemProduct);
-
-            const updateForm = document.getElementById('company-update-form');
-            updateForm.setAttribute('action', `/company/edit/${companyId}/`);
-
-            // Offcanvas'ı aç
-            const offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasExample'));
-            offcanvas.show();
+            });
         });
     });
 });
