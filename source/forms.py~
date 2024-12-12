@@ -1,0 +1,17 @@
+from django import forms
+from .models import Company
+
+class CompanyForm(forms.ModelForm):
+    class Meta:
+        model = Company
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(CompanyForm, self).__init__(*args, **kwargs)
+
+        self.fields['siem_product'].label = None
+        self.fields['status'].widget.attrs['disabled'] = 'disabled'
+
+    status = forms.ChoiceField(
+            choices=Company.STATUS_CHOICES,
+            widget=forms.Select(attrs={'disabled':'disabled'}))

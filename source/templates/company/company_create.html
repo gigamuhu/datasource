@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Create Company {% endblock %}
+{% csrf_token %}
+{% block content %}
+<div class="container">
+    <div class="my-3">
+
+        <form method="POST" action="{% url 'create_company' %}">
+            {% csrf_token %}
+            <div class="container">
+              <h4 class="mb-4">Create Company</h4>
+                <div class="row">
+                    <div class="col-md-8">
+
+                        <div class="card">
+                            <div class="card-header">Company Information</div>
+
+                            <div class="card-body">
+                                <!-- Company Name -->
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="company_name" name="company_name"
+                                               placeholder="Company Name" required>
+                                        <label for="company_name">Company Name</label>
+                                    </div>
+                                </div>
+
+                                <div class="">
+
+                                    <!-- Authorized Person -->
+                                    <div class="mb-3">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="authorized_person"
+                                                   name="authorized_person" placeholder="Authorized Person"
+                                                   required>
+                                            <label for="authorized_person">Authorized Person</label>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Authorized Person Mobile -->
+                                    <div class="mb-3">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="authorized_person_mobile"
+                                                   name="authorized_person_mobile" placeholder="Mobile Number"
+                                                   required>
+                                            <label for="authorized_person_mobile">Authorized Person Mobile</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Authorized Person Email -->
+                                    <div class="mb-3">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" id="authorized_person_email"
+                                                   name="authorized_person_email" placeholder="Email" required>
+                                            <label for="authorized_person_email">Authorized Person Email</label>
+                                        </div>
+                                    </div>
+
+<!--                                    &lt;!&ndash; Created By &ndash;&gt;-->
+<!--                                    <div class="mb-3">-->
+<!--                                        <div class="form-floating">-->
+<!--                                            <input type="text" class="form-control" id="created_by"-->
+<!--                                                   name="created_by"-->
+<!--                                                   placeholder="Created By" required>-->
+<!--                                            <label for="created_by">Created By</label>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card my-3">
+                            <div class="card-header">Notified Emails</div>
+
+                            <div class="card-body">
+                                <!-- Notified Email To -->
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="notified_email_to"
+                                               name="notified_email_to" placeholder="Email" required>
+                                        <label for="notified_email_to">Notified Email To</label>
+                                    </div>
+                                </div>
+
+                                <!-- Notified Email CC -->
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="notified_email_cc"
+                                               name="notified_email_cc" placeholder="Email" required>
+                                        <label for="notified_email_cc">Notified Email CC</label>
+                                    </div>
+                                </div>
+
+                                <!-- Notified Email BCC -->
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="notified_email_bcc"
+                                               name="notified_email_bcc" placeholder="Email" required>
+                                        <label for="notified_email_bcc">Notified Email BCC</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">Siem Communation</div>
+
+                            <div class="card-body" style="padding-top: .5rem;">
+                                <!-- SIEM Product (Dropdown) -->
+                                <div class="mb-3">
+                                    <div class="">
+                                        <div class="p-2" style="color:#4c4e5bfa">SIEM Product</div>
+                                        <select class="form-select" id="siem_product" name="siem_product">
+
+                                            {% for value, label in form.siem_product.field.choices %}
+                                            <option value="{{ value }}" {% if value == "" %}disabled selected{% endif %}>{{ label }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- SIEM Username -->
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="siem_username"
+                                               name="siem_username" placeholder="SIEM Username">
+                                        <label for="siem_username">SIEM Username</label>
+                                    </div>
+                                </div>
+
+                                <!-- SIEM Password -->
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <input type="password" class="form-control" id="siem_password"
+                                               name="siem_password" placeholder="SIEM Password">
+                                        <label for="siem_password">SIEM Password</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card my-3">
+                            <div class="card-header">Tenant</div>
+                            <div class="card-body" style="padding-top: .5rem;">
+                                <!-- Status (Dropdown) -->
+                                <div class="mb-3">
+                                    <div class="" >
+                                        <div class="p-2" style="color:#4c4e5bfa">Status</div>
+                                        <select class="form-select" id="status" name="status" required>
+
+                                            {% for value, label in form.status.field.choices %}
+                                            <option value="{{ value }}" {% if value ==  "" %}disabled selected{% endif %}>{{ label }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Corporate Sales Manager (Dropdown) -->
+                                <div class="mb-2">
+                                    <div>
+                                        <div class="p-2" style="color:#4c4e5bfa">Corporate Sales Manager</div>
+                                        <select class="form-select" id="corporate_sales_manager"
+                                                name="corporate_sales_manager" required>
+
+                                            {% for value, label in form.corporate_sales_manager.field.choices %}
+                                            <option value="{{ value }}" {% if value == "" %}disabled selected{% endif %}>{{ label }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <!-- Industry (Dropdown) -->
+                                <div class="mb-2">
+                                    <div class="">
+                                        <div class="p-2" style="color:#4c4e5bfa">Industry</div>
+                                        <select class="form-select" id="industry" name="industry" required>
+                                            {% for value, label in form.industry.field.choices %}
+                                            <option value="{{ value }}" {% if value == "" %}disabled selected{% endif %}>{{ label }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Type (Dropdown) -->
+                                <div class="mb-2">
+                                    <div class="">
+                                        <div class="p-2" style="color:#4c4e5bfa">Type</div>
+                                        <select class="form-select" id="type" name="type" required>
+
+                                            {% for value, label in form.type.field.choices %}
+                                            <option value="{{ value }}" {% if value ==  "" %}disabled selected{% endif %}>{{ label }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="d-flex justify-content-end " >
+                      <button type="submit" class="btn btn-success my-3 px-5"> Add</button>
+                 </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

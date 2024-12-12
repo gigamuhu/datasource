@@ -1,0 +1,25 @@
+<!-- register.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Kayıt Ol {% endblock %}
+
+{% block content %}
+    <h1>Kayıt Ol</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Formu parantez içerisinde olduğu gibi ekleyin -->
+        <button type="submit">Kayıt Ol</button>
+    </form>
+
+    <p>Zaten hesabınız var mı? <a href="{% url 'login' %}">Giriş yapın</a></p>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

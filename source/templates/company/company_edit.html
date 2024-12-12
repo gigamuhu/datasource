@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Şirketi Düzenle: {{ company.name }}</h1>
+        <form method="POST" action="{% url 'company_update' company.pk %}">
+            {% csrf_token %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Company Name -->
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Company Name" value="{{ form.company_name.value }}" required>
+                                <label for="company_name">Company Name</label>
+                            </div>
+                        </div>
+
+                        <!-- Notified Email To -->
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" id="notified_email_to" name="notified_email_to" placeholder="Email" value="{{ form.notified_email_to.value }}" required>
+                                <label for="notified_email_to">Notified Email To</label>
+                            </div>
+                        </div>
+
+                        <!-- Notified Email CC -->
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" id="notified_email_cc" name="notified_email_cc" placeholder="Email" value="{{ form.notified_email_cc.value }}" required>
+                                <label for="notified_email_cc">Notified Email CC</label>
+                            </div>
+                        </div>
+
+                        <!-- Notified Email BCC -->
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" id="notified_email_bcc" name="notified_email_bcc" placeholder="Email" value="{{ form.notified_email_bcc.value }}" required>
+                                <label for="notified_email_bcc">Notified Email BCC</label>
+                            </div>
+                        </div>
+
+                        <!-- Dept (Dropdown) -->
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <select class="form-select" id="dept" name="dept" required>
+                                    <option value="">Select Department</option>
+                                    {% for value, label in form.dept.field.choices %}
+                                        <option value="{{ value }}" {% if value == form.dept.value %}selected{% endif %}>{{ label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Status (Dropdown) -->
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <select class="form-select" id="status" name="status" required>
+                                    <option value="">Select Status</option>
+                                    {% for value, label in form.status.field.choices %}
+                                        <option value="{{ value }}" {% if value == form.status.value %}selected{% endif %}>{{ label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Corporate Sales Manager (Dropdown) -->
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <select class="form-select" id="corporate_sales_manager" name="corporate_sales_manager" required>
+                                    <option value="">Select Sales Manager</option>
+                                    {% for value, label in form.corporate_sales_manager.field.choices %}
+                                        <option value="{{ value }}" {% if value == form.corporate_sales_manager.value %}selected{% endif %}>{{ label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <!-- Authorized Person -->
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="authorized_person" name="authorized_person" placeholder="Authorized Person" value="{{ form.authorized_person.value }}" required>
+                                <label for="authorized_person">Authorized Person</label>
+                            </div>
+                        </div>
+
+                        <!-- Authorized Person Mobile -->
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="authorized_person_mobile" name="authorized_person_mobile" placeholder="Mobile Number" value="{{ form.authorized_person_mobile.value }}" required>
+                                <label for="authorized_person_mobile">Authorized Person Mobile</label>
+                            </div>
+                        </div>
+
+                        <!-- Authorized Person Email -->
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" id="authorized_person_email" name="authorized_person_email" placeholder="Email" value="{{ form.authorized_person_email.value }}" required>
+                                <label for="authorized_person_email">Authorized Person Email</label>
+                            </div>
+                        </div>
+
+                        <!-- Type (Dropdown) -->
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <select class="form-select" id="type" name="type" required>
+                                    <option value="">Select Type</option>
+                                    {% for value, label in form.type.field.choices %}
+                                        <option value="{{ value }}" {% if value == form.type.value %}selected{% endif %}>{{ label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Industry (Dropdown) -->
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <select class="form-select" id="industry" name="industry" required>
+                                    <option value="">Select Industry</option>
+                                    {% for value, label in form.industry.field.choices %}
+                                        <option value="{{ value }}" {% if value == form.industry.value %}selected{% endif %}>{{ label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Created By -->
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="created_by" name="created_by" placeholder="Created By" value="{{ form.created_by.value }}" required>
+                                <label for="created_by">Created By</label>
+                            </div>
+                        </div>
+
+                        <!-- Created On (Disabled) -->
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="created_on" name="created_on" placeholder="Created On" disabled value="{{ form.created_on.value }}">
+                                <label for="created_on">Created On</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
