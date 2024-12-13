@@ -18,7 +18,6 @@ class Company(models.Model):
     TYPE_CHOICES = [
         ('', 'Select'),
         ('customer', 'Customer'),
-        ('none', 'None'),
     ]
 
     INDUSTRY_CHOICES = [

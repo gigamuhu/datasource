@@ -31,7 +31,7 @@ class Company(models.Model):
     SIEM_PRODUCT_CHOICES = [
         ('', 'Select'),
         ('trellix_esm', 'Trellix ESM'),
-        ('ibm', 'IBM'),
+        ('forti_siem', 'Forti SIEM'),
     ]
 
     company_name = models.CharField(unique=True,max_length=100)

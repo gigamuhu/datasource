@@ -309,6 +309,9 @@
                                              Test Connect</a>
                                     </div>
 
+                                    <div class="spinner-border text-secondary" style="visibility:hidden" role="status">
+                                      <span class="visually-hidden">Loading...</span>
+                                    </div>
                                   <div id="connection-result" style="margin-top: 10px;"></div>
 
                                 </div>
@@ -455,7 +458,7 @@
         .catch(error => {
             console.error("Error:", error);
             const resultMessage = document.getElementById("connection-result");
-            resultMessage.textContent = "An error occurred";
+            resultMessage.textContent = "Connection failed";
             resultMessage.style.color = "red";
         });
 

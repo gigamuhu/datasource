@@ -1,4 +1,5 @@
 import base64
+import json
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -126,44 +127,32 @@ def register_view(request):
 
 
 
+
 def siem_test_connect(request):
     if request.method == 'POST':
-        # API'ye yapılacak istek için URL
         login_url = "https://10.0.3.82/rs/esm/login"
+        body = json.loads(request.body)
 
-        print(request.POST)
-        # username = request.POST.get("siem_username")
-        # password = request.POST.get("siem_password")
-        #
-        # encoded_username = base64.b64encode(username.encode()).decode()
-        # encoded_password = base64.b64encode(password.encode()).decode()
+        username = body.get("siem_username")
+        password = body.get("siem_password")
 
+        # Base64 encode işlemi
+        encoded_username = base64.b64encode(username.encode()).decode()
+        encoded_password = base64.b64encode(password.encode()).decode()
+
+        # Giriş verilerini hazırlama
         login_payload = {
-            "username": "U09BUlVTRVI=",
-            "password": "RggsNVNjVUhtNi16RzJd0yuhcmE4Sg==",
+            "username": encoded_username,
+            "password": encoded_password,
             "locale": "en_US"
         }
-        #
-        # login_payload = {
-        #     "username": encoded_username,
-        #     "password": encoded_password,
-        #     "locale": "en_US"
-        # }
 
-        # Disable SSL verification for the login request
-        # login_response = requests.post(login_url, json=login_payload, verify=False)
-        # print(login_response)
-        #
-        # # Eğer istek başarılıysa (200 OK), 2.isteği at
-        # if login_response.status_code == 200 or login_response.status_code == 201:
-        #     # data = login_response.json()
-        #     # print(data)
-        #
-        #     return JsonResponse({"message": "Connection successful","status": True})
-        # else:
-        #     return JsonResponse({"message": "Connection failed!.","status": False})
+        # API isteğini gönder
+        login_response = requests.post(login_url, json=login_payload, verify=False)
 
-        return JsonResponse({"message": "Connection successful!.", "status": True})
+        if login_response.status_code in [200, 201]:
+            return JsonResponse({"message": "Connection successful", "status": True})
+        else:
+            return JsonResponse({"message": "Connection failed!", "status": False})
 
-    if request.method == 'GET':
-        return JsonResponse({"message": "Connection failed!.", "status": False})
+    return JsonResponse({"message": "Invalid request method", "status": False})
