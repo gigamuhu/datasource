@@ -76,7 +76,7 @@ def edit_company(request, company_id):
         print(form.errors)
         if form.is_valid():
             form.save()
-            return redirect('/company/list')  # Düzenleme sonrası liste sayfasına yönlendir
+            return redirect('/company/detail/' + str(company_id))  # Düzenleme sonrası liste sayfasına yönlendir
     else:
         form = CompanyForm(instance=company)
 
@@ -111,6 +111,19 @@ def company_create(request):
         form = CompanyForm()
     return render(request, 'company/company_create.html', {'form': form})
 
+def company_detail(request, company_id):
+    company = get_object_or_404(Company, id=company_id)
+
+    if request.method == 'POST':
+        form = CompanyForm(request.POST, instance=company)
+        if form.is_valid():
+            form.save()
+            # Redirect or send a success message
+    else:
+        form = CompanyForm(instance=company)
+
+    return render(request, 'company/company_detail.html', {'form': form, 'company': company})
+
 
 
 def register_view(request):
@@ -130,13 +143,16 @@ def register_view(request):
 
 def siem_test_connect(request):
     if request.method == 'POST':
-        login_url = "https://10.0.3.82/rs/esm/login"
+
         body = json.loads(request.body)
 
         username = body.get("siem_username")
         password = body.get("siem_password")
+        url = body.get("siem_url")
+        siem_product = body.get("siem_product")
 
         # Base64 encode işlemi
+        login_url = url
         encoded_username = base64.b64encode(username.encode()).decode()
         encoded_password = base64.b64encode(password.encode()).decode()
 
@@ -154,4 +170,58 @@ def siem_test_connect(request):
             return JsonResponse({"message": "Connection successful", "status": True})
         else:
             return JsonResponse({"message": "Connection failed!", "status": False})
+
+def get_data_source(request, company_id):
+    company = get_object_or_404(Company, id=company_id)
+    print(company)
+    print(company.siem_password)
+    print(company.siem_username)
+
+    # Base64 encode işlemi
+    username = company.siem_username
+    password = company.siem_password
+
+    login_url = "https://10.0.3.82/rs/esm/login"
+    second_request_url = "https://10.0.3.82/rs/esm/v2/qryGetDeviceLastAlertTime"
+    encoded_username = base64.b64encode(username.encode()).decode()
+    encoded_password = base64.b64encode(password.encode()).decode()
+
+    # Giriş verilerini hazırlama
+    login_payload = {
+        "username": encoded_username,
+        "password": encoded_password,
+        "locale": "en_US"
+    }
+
+    # API isteğini gönder
+    login_response = requests.post(login_url, json=login_payload, verify=False)
+
+    if login_response.status_code in [200, 201]:
+        # Extract cookies and X-Xsrf-Token from the response
+        print("LOGIN RESPONSE : ",login_response)
+        cookies = login_response.cookies
+        xsrf_token = login_response.headers.get('Xsrf-Token')
+
+        # Second POST request with the obtained cookies and X-Xsrf-Token
+        headers = {
+            "Cookie": "; ".join([f"{name}={value}" for name, value in cookies.items()]),
+            "X-Xsrf-Token": xsrf_token
+            # Add any additional headers if required
+        }
+
+        # Disable SSL verification for the second request
+        second_response = requests.post(second_request_url, headers=headers, verify=False)
+
+        # Check if the second request was successful
+        if second_response.status_code == 200:
+            # Parse the JSON response
+            print("SECOND RESPONSE : ",second_response)
+
+            print("SECOND RESPONSE : ",second_response.json())
+
+            device_info_list = second_response.json()
+
+        return JsonResponse({"message": "Connection successful", "status": True})
+    else:
+        return JsonResponse({"message": "Connection failed!", "status": False})
 

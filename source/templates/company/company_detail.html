@@ -1,0 +1,410 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Company List {% endblock %}
+
+{% block content %}
+
+<div class="container my-5">
+    <form method="POST" id="company-update-form" action="{% url 'company_update' company.id %}">
+        <div class="container">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                            data-bs-target="#home-tab-pane" type="button" role="tab"
+                            aria-controls="home-tab-pane" aria-selected="true">Company Information
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="siem-communication-tab"
+                            data-bs-toggle="tab" data-bs-target="#siem-communication-tab-pane" type="button" role="tab"
+                            aria-controls="siem-communication-tab-pane" aria-selected="false">Siem Communication
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="data-source-tab"
+                            data-bs-toggle="tab" data-bs-target="#data-source-tab-pane" type="button" role="tab"
+                            aria-controls="data-source-tab-pane" aria-selected="false">Data Source
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+                 tabindex="0">
+                <div class="container my-3  ">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">Company Information</div>
+                                <div class="card-body">
+                                    <!-- Company Name -->
+                                    <div class="mb-3">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="company_name"
+                                                   name="company_name"
+                                                   placeholder="Company Name" value="{{ company.company_name }}"
+                                                   required>
+                                            <label for="company_name">Company Name</label>
+                                        </div>
+                                    </div>
+                                    <!-- Authorized Person -->
+                                    <div class="mb-3">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="authorized_person"
+                                                   name="authorized_person" placeholder="Authorized Person"
+                                                   value="{{ company.authorized_person }}" required>
+                                            <label for="authorized_person">Authorized Person</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Authorized Person Mobile -->
+                                    <div class="mb-3">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="authorized_person_mobile"
+                                                   name="authorized_person_mobile" placeholder="Mobile Number"
+                                                   value="{{ company.authorized_person_mobile }}" required>
+                                            <label for="authorized_person_mobile">Authorized Person Mobile</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Authorized Person Email -->
+                                    <div class="mb-3">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" id="authorized_person_email"
+                                                   name="authorized_person_email" placeholder="Email"
+                                                   value="{{ company.authorized_person_email }}" required>
+                                            <label for="authorized_person_email">Authorized Person Email</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Created By -->
+                                    <div class="mb-3">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="created_by"
+                                                   disabled name="created_by" placeholder="Created By"
+                                                   value="{{ company.created_by }}" required>
+                                            <label for="created_by">Created By</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card my-3">
+                                <div class="card-header">Notified Emails</div>
+                                <div class="card-body">
+                                    <!-- Notified Email To -->
+                                    <div class="mb-3">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" id="notified_email_to"
+                                                   name="notified_email_to" placeholder="Email"
+                                                   value="{{ company.notified_email_to }}" required>
+                                            <label for="notified_email_to">Notified Email To</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Notified Email CC -->
+                                    <div class="mb-3">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" id="notified_email_cc"
+                                                   name="notified_email_cc" placeholder="Email"
+                                                   value="{{ company.notified_email_cc }}">
+                                            <label for="notified_email_cc">Notified Email CC</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Notified Email BCC -->
+                                    <div class="mb-3">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" id="notified_email_bcc"
+                                                   name="notified_email_bcc" placeholder="Email"
+                                                   value="{{ company.notified_email_bcc }}">
+                                            <label for="notified_email_bcc">Notified Email BCC</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header"></div>
+                                <div class="card-body" style="padding-top: 1rem;">
+                                    <!-- Status (Dropdown) -->
+                                    <div class="mb-3">
+                                        <div class="" style="color:#4c4e5bfa">Status</div>
+                                        <select class="form-select" id="status" name="status" required>
+                                            {% for value, label in form.fields.status.choices %}
+                                            <option value="{{ value }}" {% if value == "" %}disabled{% endif %}
+                                            {% if value == company.status %}selected{% endif%}>{{ label }}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <!-- Corporate Sales Manager (Dropdown) -->
+                                    <div class="mb-3">
+                                        <div class=" ">
+                                            <div class="mb-2" style="color:#4c4e5bfa">Corporate Sales Manager</div>
+                                            <select class="form-select" id="corporate_sales_manager"
+                                                    name="corporate_sales_manager" required>
+                                                {% for value, label in form.fields.corporate_sales_manager.choices %}
+                                                <option value="{{ value }}"
+                                                        {% if value == "" %}disabled{% endif %}
+                                                {% if value == company.corporate_sales_manager %}selected{% endif %}>
+                                                {{ label }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- Type (Dropdown) -->
+                                    <div class="mb-3">
+                                        <div class=" ">
+                                            <div class=" mb-2" style="color:#4c4e5bfa">Type</div>
+                                            <select class="form-select" id="type" name="type" required>
+                                                {% for value, label in form.fields.type.choices %}
+                                                <option value="{{ value }}" {% if value == "" %}disabled{% endif %}
+                                                {% if value == company.type %}selected{% endif %}>{{ label }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Industry (Dropdown) -->
+                                    <div class="mb-3">
+                                        <div class="">
+                                            <div class="mb-2" style="color:#4c4e5bfa">Industry</div>
+                                            <select class="form-select" id="industry" name="industry"
+                                                    required>
+                                                {% for value, label in form.fields.industry.choices %}
+                                                <option value="{{ value }}" {% if value == "" %}disabled{% endif %}
+                                                {% if value == company.industry %}selected{% endif %}> {{ label }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Buttons -->
+                    <div class="buttons d-flex justify-content-end">
+                        <button type="submit" class="btn btn-info me-1">
+                            <i class="bi bi-pencil-square"></i> Update Record
+                        </button>
+
+                        <button type="button" id="btn-delete" class="btn btn-info"
+                                data-id="{{ company.id }}"
+                                data-toggle="modal" data-target="#exampleModal">
+                            <i class="bi bi-trash3 me-1"></i>
+                            Delete Record
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="siem-communication-tab-pane" role="tabpanel"
+                 aria-labelledby="siem-communication-tab" tabindex="0">
+                <div class="container">
+                    <div class="card my-3">
+                        <div class="card-header">Siem Communication</div>
+                        <div class="card-body">
+                            <!-- SIEM Product -->
+                            <div class="mb-3">
+                                <label for="siem_product">SIEM Product</label>
+                                <select class="form-select" id="siem_product" name="siem_product">
+                                    {% for value, label in form.fields.siem_product.choices %}
+                                    <option value="{{ value }}" {% if value == company.siem_product_choices %}selected{% endif %}
+                                            {% if value == "" %}disabled{% endif %}>
+                                    {{ label }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <!-- SIEM Url -->
+                            <div class="mb-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="siem_url"
+                                           name="siem_url"
+                                           placeholder="SIEM Url" value="https://10.0.3.82/rs/esm/login">
+                                    <label for="siem_password">SIEM Url</label>
+                                </div>
+                            </div>
+
+                            <!-- SIEM Username -->
+                            <div class="mb-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="siem_username" name="siem_username"
+                                           placeholder="SIEM Username" value="{{ company.siem_username }}">
+                                    <label for="siem_username">SIEM Username</label>
+                                </div>
+                            </div>
+
+                            <!-- SIEM Password -->
+                            <div class="mb-3">
+                                <div class="form-floating">
+                                    <input type="password" class="form-control" id="siem_password"
+                                           name="siem_password"
+                                           placeholder="SIEM Password" value="{{ company.siem_password }}">
+                                    <label for="siem_password">SIEM Password</label>
+                                </div>
+                            </div>
+
+                            <!-- Test Connect Button -->
+                            <div class="mb-3 d-flex">
+                                <div class="form-floating me-3">
+                                    <div class="buttons d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-info me-1">
+                                            Update Credentials
+                                        </button>
+
+                                        <a id="test-connect-button" class="btn btn-info">
+                                            Test Connect</a>
+                                    </div>
+
+                                    <div class="spinner-border text-secondary" style="visibility:hidden" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div id="connection-result" style="margin-top: 10px;"></div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="tab-pane fade" id="data-source-tab-pane" role="tabpanel"
+                 aria-labelledby="siem-communication-tab" tabindex="0">
+                <div class="container">
+                    <div class="card my-3">
+                        <div class="card-header d-flex justify-content-between">
+                            <div>
+                                Data Sources
+                            </div>
+                            <a type="button" id="get-data-sources" class="btn btn-info">Get</a>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Device Name</th>
+                                  <th scope="col">Device Type</th>
+                                  <th scope="col">Create Time</th>
+                                  <th scope="col">Last Event</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row">1</th>
+                                  <td>Mark</td>
+                                  <td>Otto</td>
+                                  <td>@mdo</td>
+                                  <td>@mdo</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<!-- Delete Company -->
+<div class="modal fade bg-secondary" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this company?
+            </div>
+            <div class="modal-footer">
+                <!-- Dynamic deletion link -->
+                <a id="delete-link" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+ 
+     const deleteBtn = document.getElementById('btn-delete')
+     const companyId = deleteBtn.getAttribute('data-id');
+ 
+     const siemUrlInput = document.getElementById('siem_url')
+
+     //Get Data source button
+     const getDataSource = document.getElementById('get-data-sources')
+     getDataSource.setAttribute('href', `/company/get-data-source/${companyId}/`);
+
+     // delete linkini seç
+     const deleteLink = document.getElementById('delete-link');
+     // Modal içindeki delete linkini güncelle
+     deleteLink.setAttribute('href', `/company/delete/${companyId}/`);
+ 
+     // Test Connect işlevi
+     const testConnectButton = document.getElementById('test-connect-button')
+      .addEventListener('click', function(event) {
+ 
+         const siemUrl = siemUrlInput.value;
+         const siemUsername = document.getElementById('siem_username').value
+         const siemPassword = document.getElementById('siem_password').value
+         const siemProduct = document.getElementById('siem_product').value
+ 
+         fetch("/siem-test-connect", {
+                 method: "POST",
+                 headers: {
+                     "Content-Type": "application/json",
+                     "X-CSRFToken": "{{ csrf_token }}"
+                 },
+                 body: JSON.stringify({
+                     siem_username: siemUsername,
+                     siem_password: siemPassword,
+                     siem_url: siemUrl,
+                     siem_product: siemProduct
+                 })
+             })
+             .then(response => response.json())
+             .then(data => {
+                 const resultMessage = document.getElementById("connection-result");
+                 if (data.status) {
+                     resultMessage.textContent = data.message;
+                     resultMessage.style.color = "green";
+                 } else {
+                     resultMessage.textContent = data.message;
+                     resultMessage.style.color = "red";
+                 }
+             })
+             .catch(error => {
+                 const resultMessage = document.getElementById("connection-result");
+                 resultMessage.textContent = "Connection failed";
+                 resultMessage.style.color = "red";
+             });
+         });
+ 
+ });
+
+</script>
+
+{% endblock %}
