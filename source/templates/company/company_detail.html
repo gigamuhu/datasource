@@ -5,9 +5,9 @@
 
 {% block content %}
 
-<div class="container my-5">
+<div class="container-xxl my-5">
     <form method="POST" id="company-update-form" action="{% url 'company_update' company.id %}">
-        <div class="container">
+        <div class="container-xxl">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
@@ -33,7 +33,7 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
                  tabindex="0">
-                <div class="container my-3  ">
+                <div class="container-xxl my-3  ">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-8">
@@ -211,7 +211,7 @@
 
             <div class="tab-pane fade" id="siem-communication-tab-pane" role="tabpanel"
                  aria-labelledby="siem-communication-tab" tabindex="0">
-                <div class="container">
+                <div class="container-xxl">
                     <div class="card my-3">
                         <div class="card-header">Siem Communication</div>
                         <div class="card-body">
@@ -265,11 +265,12 @@
                                             Update Credentials
                                         </button>
 
-                                        <a id="test-connect-button" class="btn btn-info">
+                                        <a id="test-connect-button" class="btn btn-info text-white">
                                             Test Connect</a>
                                     </div>
 
-                                    <div class="spinner-border text-secondary" style="visibility:hidden" role="status">
+                                    <div class="spinner-border text-secondary my-2"
+                                         id="status-spinner" style="visibility:hidden" role="status">
                                         <span class="visually-hidden">Loading...</span>
                                     </div>
                                     <div id="connection-result" style="margin-top: 10px;"></div>
@@ -286,7 +287,7 @@
 
             <div class="tab-pane fade" id="data-source-tab-pane" role="tabpanel"
                  aria-labelledby="siem-communication-tab" tabindex="0">
-                <div class="container">
+                <div class="container-xxl">
                     <div class="card my-3">
                         <div class="card-header d-flex justify-content-between">
                             <div>
@@ -306,13 +307,6 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
-                                  <th scope="row">1</th>
-                                  <td>Mark</td>
-                                  <td>Otto</td>
-                                  <td>@mdo</td>
-                                  <td>@mdo</td>
-                                </tr>
                               </tbody>
                             </table>
                         </div>
@@ -355,23 +349,73 @@
      const siemUrlInput = document.getElementById('siem_url')
 
      //Get Data source button
-     const getDataSource = document.getElementById('get-data-sources')
-     getDataSource.setAttribute('href', `/company/get-data-source/${companyId}/`);
+     const tableBody = document.querySelector("#data-source-tab-pane tbody");
+
+     const getDataSourceButton = document.getElementById('get-data-sources')
+     getDataSourceButton.setAttribute('href', `/company/get-data-source/${companyId}/`);
+
+     getDataSourceButton.addEventListener("click", function(event) {
+        event.preventDefault()
+
+        const startTime = performance.now()
+
+        fetch(`/company/get-data-source/${companyId}/`, {
+            method: "GET",
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}",
+            },
+        })
+            .then((response) => {
+                const endTime = performance.now(); // Bitiş zamanı
+                const duration = endTime - startTime; // Geçen süre (ms)
+                console.log(`${duration.toFixed(2)} ms.`);
+                return response.json()
+            })
+            .then((data) => {
+                // Tabloyu temizle
+                tableBody.innerHTML = "";
+
+                // Verileri tabloya ekle
+                data.data.forEach((item, index) => {
+                    const row = `
+                        <tr>
+                            <th scope="row">${index + 1}</th>
+                            <td>${item.deviceName}</td>
+                            <td>${item.deviceType}</td>
+                            <td>${item.createTime}</td>
+                            <td>${item.lastEvent}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            })
+            .catch((error) => {
+                console.error("Error fetching data:", error);
+            });
+     });
+
+
 
      // delete linkini seç
      const deleteLink = document.getElementById('delete-link');
      // Modal içindeki delete linkini güncelle
      deleteLink.setAttribute('href', `/company/delete/${companyId}/`);
- 
+
+    //spinner butonu seçim
+    const statusSpinner = document.getElementById('status-spinner');
+
      // Test Connect işlevi
      const testConnectButton = document.getElementById('test-connect-button')
       .addEventListener('click', function(event) {
- 
+
+         //spinner butonu visibility
+         statusSpinner.style.visibility = "visible"
+
          const siemUrl = siemUrlInput.value;
          const siemUsername = document.getElementById('siem_username').value
          const siemPassword = document.getElementById('siem_password').value
          const siemProduct = document.getElementById('siem_product').value
- 
+
          fetch("/siem-test-connect", {
                  method: "POST",
                  headers: {
@@ -388,19 +432,23 @@
              .then(response => response.json())
              .then(data => {
                  const resultMessage = document.getElementById("connection-result");
+
                  if (data.status) {
-                     resultMessage.textContent = data.message;
+                     resultMessage.innerHTML = '<i class="bi bi-check2-circle fs-5 me-2"></i>' + data.message;
                      resultMessage.style.color = "green";
                  } else {
-                     resultMessage.textContent = data.message;
+                     resultMessage.innerHTML = '<i class="bi bi-x-lg fs-5 me-2"></i>' + data.message
                      resultMessage.style.color = "red";
                  }
              })
              .catch(error => {
                  const resultMessage = document.getElementById("connection-result");
-                 resultMessage.textContent = "Connection failed";
+                 resultMessage.innerHTML = '<i class="bi bi-x-lg fs-5 me-2"></i> Connection Failed'
                  resultMessage.style.color = "red";
-             });
+             })
+             .finally(() => {
+                statusSpinner.style.visibility = "hidden"
+                });
          });
  
  });

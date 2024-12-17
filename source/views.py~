@@ -1,5 +1,6 @@
 import base64
 import json
+import os
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -12,6 +13,7 @@ import requests
 
 from .forms import  CompanyForm
 from .models import  Company
+
 
 
 def index(request):
@@ -173,9 +175,6 @@ def siem_test_connect(request):
 
 def get_data_source(request, company_id):
     company = get_object_or_404(Company, id=company_id)
-    print(company)
-    print(company.siem_password)
-    print(company.siem_username)
 
     # Base64 encode işlemi
     username = company.siem_username
@@ -193,34 +192,42 @@ def get_data_source(request, company_id):
         "locale": "en_US"
     }
 
+    file_path = "C:\\Users\\emre.seyhan\\PycharmProjects\\datasourceapp\\datasource\\source\\response.json"
+    print(os.path.exists(file_path))
+    with open(file_path, 'r') as file:
+        data = json.load(file)
+
+
     # API isteğini gönder
-    login_response = requests.post(login_url, json=login_payload, verify=False)
-
-    if login_response.status_code in [200, 201]:
-        # Extract cookies and X-Xsrf-Token from the response
-        cookies = login_response.cookies
-        xsrf_token = login_response.headers.get('Xsrf-Token')
-
-        # Second POST request with the obtained cookies and X-Xsrf-Token
-        headers = {
-            "Cookie": "; ".join([f"{name}={value}" for name, value in cookies.items()]),
-            "X-Xsrf-Token": xsrf_token
-            # Add any additional headers if required
-        }
-
-        # Disable SSL verification for the second request
-        second_response = requests.post(second_request_url, headers=headers, verify=False)
-
-        # Check if the second request was successful
-        if second_response.status_code == 200:
-            # Parse the JSON response
-            print("SECOND RESPONSE : ",second_response)
-
-            print("SECOND RESPONSE : ",second_response.json())
-
-            device_info_list = second_response.json()
-
-        return JsonResponse({"message": "Connection successful", "status": True})
-    else:
-        return JsonResponse({"message": "Connection failed!", "status": False})
+    # login_response = requests.post(login_url, json=login_payload, verify=False)
+    #
+    # if login_response.status_code in [200, 201]:
+    #     # Extract cookies and X-Xsrf-Token from the response
+    #     print("LOGIN RESPONSE : ",login_response)
+    #     cookies = login_response.cookies
+    #     xsrf_token = login_response.headers.get('Xsrf-Token')
+    #
+    #     # Second POST request with the obtained cookies and X-Xsrf-Token
+    #     headers = {
+    #         "Cookie": "; ".join([f"{name}={value}" for name, value in cookies.items()]),
+    #         "X-Xsrf-Token": xsrf_token
+    #         # Add any additional headers if required
+    #     }
+    #
+    #     # Disable SSL verification for the second request
+    #     second_response = requests.post(second_request_url, headers=headers, verify=False)
+    #
+    #     # Check if the second request was successful
+    #     if second_response.status_code == 200:
+    #         # Parse the JSON response
+    #         print("SECOND RESPONSE : ",second_response)
+    #
+    #         print("SECOND RESPONSE : ",second_response.json())
+    #
+    #         device_info_list = second_response.json()
+    #
+    #     return JsonResponse({"message": "Connection successful", "status": True})
+    # else:
+    #    return JsonResponse({"message": "Connection failed!", "status": False})
+    return JsonResponse({"data":data})
 

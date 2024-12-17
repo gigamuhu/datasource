@@ -1,0 +1,416 @@
+[
+    {
+        "deviceName": "Correlation Engine",
+        "deviceType": "Correlation Engine",
+        "lastEvent": "26.09.2023 13:02:55",
+        "createTime": "03.12.2024 05:51:40"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV009-192.168.89.188",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "26.06.2024 11:26:12",
+        "createTime": "03.12.2024 05:57:14"
+    },
+    {
+        "deviceName": "OBS-DNS-OBSSRV001-192.168.88.5",
+        "deviceType": "Windows DNS",
+        "lastEvent": "12.09.2024 14:21:18",
+        "createTime": "03.12.2024 06:01:04"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV010-172.16.0.10",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "16.09.2024 13:10:06",
+        "createTime": "03.12.2024 06:01:14"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV077-192.168.89.207",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "15.10.2024 19:57:26",
+        "createTime": "03.12.2024 06:09:50"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV018-192.168.88.4",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "02.12.2024 06:57:10",
+        "createTime": "03.12.2024 06:10:24"
+    },
+    {
+        "deviceName": "OBS-FW-JustWorkFW-192.168.92.1",
+        "deviceType": "FortiGate UTM - Space Delimited",
+        "lastEvent": "26.09.2023 13:02:55",
+        "createTime": "03.12.2024 06:10:24"
+    },
+    {
+        "deviceName": "OBS-LNX-OBSSRV110-192.168.89.110-TIE",
+        "deviceType": "Linux",
+        "lastEvent": "26.09.2023 13:02:55",
+        "createTime": "03.12.2024 06:10:24"
+    },
+    {
+        "deviceName": "Obase-EPO_Application and Change Control (ePO)",
+        "deviceType": "Application and Change Control (ePO)",
+        "lastEvent": "26.09.2023 13:02:55",
+        "createTime": "03.12.2024 06:12:00"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV033-192.168.89.211",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 05:51:40",
+        "createTime": "03.12.2024 06:12:30"
+    },
+    {
+        "deviceName": "OBS-DHCP-OBSSRV001-192.168.88.5",
+        "deviceType": "Windows DHCP",
+        "lastEvent": "03.12.2024 05:57:14",
+        "createTime": "03.12.2024 06:13:00"
+    },
+    {
+        "deviceName": "OBS-LNX-OBSSRV046-192.168.89.46",
+        "deviceType": "Linux",
+        "lastEvent": "03.12.2024 06:01:04",
+        "createTime": "03.12.2024 06:14:20"
+    },
+    {
+        "deviceName": "OBS-LNX-OBSSRV045-192.168.89.45",
+        "deviceType": "Linux",
+        "lastEvent": "03.12.2024 06:01:14",
+        "createTime": "03.12.2024 06:18:40"
+    },
+    {
+        "deviceName": "OBS-WIN-OBASEVM06-PRX02-192.168.88.107",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:09:50",
+        "createTime": "03.12.2024 06:19:50"
+    },
+    {
+        "deviceName": "Obase-EPO_Endpoint Security Firewall (ePO)",
+        "deviceType": "Endpoint Security Firewall (ePO)",
+        "lastEvent": "03.12.2024 06:10:24",
+        "createTime": "03.12.2024 06:22:20"
+    },
+    {
+        "deviceName": "Obase-EPO_Endpoint Security Platform (ePO)",
+        "deviceType": "Endpoint Security Platform (ePO)",
+        "lastEvent": "03.12.2024 06:10:24",
+        "createTime": "03.12.2024 06:30:30"
+    },
+    {
+        "deviceName": "Obase-EPO_Endpoint Security Web Control (ePO)",
+        "deviceType": "Endpoint Security Web Control (ePO)",
+        "lastEvent": "03.12.2024 06:10:24",
+        "createTime": "03.12.2024 06:32:14"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV042-192.168.89.42",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:12:00",
+        "createTime": "03.12.2024 06:32:14"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV002-192.168.89.2",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:12:30",
+        "createTime": "03.12.2024 06:32:14"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV079-192.168.88.29",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:13:00",
+        "createTime": "03.12.2024 06:33:10"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV008-192.168.89.187",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:14:20",
+        "createTime": "03.12.2024 06:35:10"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV026-192.168.89.203",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:18:40",
+        "createTime": "03.12.2024 06:35:10"
+    },
+    {
+        "deviceName": "OBS-WIN-OBASEVM07-PRX02-192.168.88.109",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:19:50",
+        "createTime": "03.12.2024 06:35:24"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV113-192.168.89.113",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:22:20",
+        "createTime": "03.12.2024 06:35:30"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV114-192.168.89.114",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:30:30",
+        "createTime": "03.12.2024 06:35:44"
+    },
+    {
+        "deviceName": "Obase-EPO_Endpoint Security Adaptive Threat Protection (ePO)",
+        "deviceType": "Endpoint Security Adaptive Threat Protection (ePO)",
+        "lastEvent": "03.12.2024 06:32:14",
+        "createTime": "03.12.2024 06:36:10"
+    },
+    {
+        "deviceName": "Obase-EPO_Endpoint Security Threat Prevention (ePO)",
+        "deviceType": "Endpoint Security Threat Prevention (ePO)",
+        "lastEvent": "03.12.2024 06:32:14",
+        "createTime": "03.12.2024 06:37:30"
+    },
+    {
+        "deviceName": "Obase-EPO_Host Data Loss Prevention (ePO)",
+        "deviceType": "Host Data Loss Prevention (ePO)",
+        "lastEvent": "03.12.2024 06:32:14",
+        "createTime": "03.12.2024 06:37:54"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV006-192.168.89.184",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:33:10",
+        "createTime": "03.12.2024 06:38:54"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV007-192.168.89.186",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:35:10",
+        "createTime": "03.12.2024 06:39:30"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV014-172.16.0.11",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:35:10",
+        "createTime": "03.12.2024 06:40:00"
+    },
+    {
+        "deviceName": "Obase-EPO_ePO Audit Log (ePO)",
+        "deviceType": "ePO Audit Log (ePO)",
+        "lastEvent": "03.12.2024 06:35:24",
+        "createTime": "03.12.2024 06:40:10"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV022-192.168.88.22",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:35:30",
+        "createTime": "03.12.2024 06:40:24"
+    },
+    {
+        "deviceName": "Rule Correlation",
+        "deviceType": "Correlation Engine",
+        "lastEvent": "03.12.2024 06:35:44",
+        "createTime": "03.12.2024 06:40:24"
+    },
+    {
+        "deviceName": "OBS-WIN-OBASEVM06-PRX01-192.168.88.106",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:36:10",
+        "createTime": "03.12.2024 06:40:30"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV035-192.168.89.213",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:37:30",
+        "createTime": "03.12.2024 06:40:44"
+    },
+    {
+        "deviceName": "OBS-LNX-OBSSRV047-192.168.89.47",
+        "deviceType": "Linux",
+        "lastEvent": "03.12.2024 06:37:54",
+        "createTime": "03.12.2024 06:41:00"
+    },
+    {
+        "deviceName": "OBS-AUTH-FortiAuthenticator-192.168.88.7",
+        "deviceType": "FortiAuthenticator",
+        "lastEvent": "03.12.2024 06:38:54",
+        "createTime": "03.12.2024 06:41:10"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV112-192.168.89.112-EPO",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:39:30",
+        "createTime": "03.12.2024 06:41:10"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV017-192.168.89.17",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:40:00",
+        "createTime": "03.12.2024 06:41:14"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV069-192.168.89.227",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:40:10",
+        "createTime": "03.12.2024 06:41:20"
+    },
+    {
+        "deviceName": "Obase-EPO",
+        "deviceType": "ePolicy Orchestrator",
+        "lastEvent": "03.12.2024 06:40:24",
+        "createTime": "03.12.2024 06:41:20"
+    },
+    {
+        "deviceName": "Obase-EPO_ePolicy Orchestrator Agent (ePO)",
+        "deviceType": "ePolicy Orchestrator Agent (ePO)",
+        "lastEvent": "03.12.2024 06:40:24",
+        "createTime": "03.12.2024 06:41:30"
+    },
+    {
+        "deviceName": "OBS-LNX-OBSSRV024-192.168.89.24",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:40:30",
+        "createTime": "03.12.2024 06:41:40"
+    },
+    {
+        "deviceName": "OBS-DNS-OBSSRV041-192.168.88.60",
+        "deviceType": "Windows DNS",
+        "lastEvent": "03.12.2024 06:40:44",
+        "createTime": "03.12.2024 06:42:20"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV015-192.168.89.201",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:41:00",
+        "createTime": "03.12.2024 06:42:40"
+    },
+    {
+        "deviceName": "OBS-DC-OBSSRV001-192.168.88.5",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:41:10",
+        "createTime": "03.12.2024 06:42:40"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV021-192.168.89.196",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:41:10",
+        "createTime": "03.12.2024 06:42:54"
+    },
+    {
+        "deviceName": "OBS-LNX-OBSSRV048-192.168.89.48",
+        "deviceType": "Linux",
+        "lastEvent": "03.12.2024 06:41:14",
+        "createTime": "03.12.2024 06:43:20"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV034-172.16.0.34",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:41:20",
+        "createTime": "03.12.2024 06:43:34"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV037-192.168.89.216",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:41:20",
+        "createTime": "03.12.2024 06:43:40"
+    },
+    {
+        "deviceName": "OBS-WIN-OBASETERM01-192.168.89.200",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:41:30",
+        "createTime": "03.12.2024 06:43:40"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV030-192.168.88.30",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:41:40",
+        "createTime": "03.12.2024 06:43:50"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV027-192.168.89.204",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:42:20",
+        "createTime": "03.12.2024 06:44:00"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV005-10.0.0.5",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:42:40",
+        "createTime": "03.12.2024 06:44:10"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV040-172.16.0.15",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:42:40",
+        "createTime": "03.12.2024 06:44:20"
+    },
+    {
+        "deviceName": "OBS-O365-MicrosoftOffice365",
+        "deviceType": "Office 365",
+        "lastEvent": "03.12.2024 06:42:54",
+        "createTime": "03.12.2024 06:44:20"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV044-192.168.88.44",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:43:20",
+        "createTime": "03.12.2024 06:44:40"
+    },
+    {
+        "deviceName": "OBS-EXC-OBSSRV102-MessageTracking-192.168.88.200",
+        "deviceType": "Exchange",
+        "lastEvent": "03.12.2024 06:43:34",
+        "createTime": "03.12.2024 06:44:54"
+    },
+    {
+        "deviceName": "OBS-DC-OBSSRV041-192.168.88.60",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:43:40",
+        "createTime": "03.12.2024 06:44:55"
+    },
+    {
+        "deviceName": "OBS-WIN-OBASEVEEAM-192.168.88.103",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:43:40",
+        "createTime": "03.12.2024 06:43:40"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV025-192.168.89.199",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:43:50",
+        "createTime": "03.12.2024 06:43:50"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV111-192.168.88.111-EPO",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:44:00",
+        "createTime": "03.12.2024 06:44:00"
+    },
+    {
+        "deviceName": "OBS-EXC-OBSSRV102-192.168.88.200",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:44:10",
+        "createTime": "03.12.2024 06:44:10"
+    },
+    {
+        "deviceName": "OBS-WIN-OBASEVM07-PRX01-192.168.88.108",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:44:20",
+        "createTime": "03.12.2024 06:44:20"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV020-192.168.89.195",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:44:20",
+        "createTime": "03.12.2024 06:44:20"
+    },
+    {
+        "deviceName": "OBS-WIN-OBSSRV073-172.16.0.73",
+        "deviceType": "Windows Event Log - WMI",
+        "lastEvent": "03.12.2024 06:44:40",
+        "createTime": "03.12.2024 06:44:40"
+    },
+    {
+        "deviceName": "OBS-LNX-DAM-192.168.89.113",
+        "deviceType": "Database Security - CEF",
+        "lastEvent": "03.12.2024 06:44:54",
+        "createTime": "03.12.2024 06:44:54"
+    },
+    {
+        "deviceName": "OBS-FW-TurkcellDCFW-192.168.88.2",
+        "deviceType": "FortiGate UTM - Space Delimited",
+        "lastEvent": "03.12.2024 06:44:55",
+        "createTime": "03.12.2024 06:44:55"
+    }
+]

@@ -624,7 +624,7 @@ font-size: 0.85rem!important;
     overflow-y: auto; /* Dikey kaydırma için */
     max-height: 100%; /* İçerik sınırı */
 
-  width: 75% !important;
+  width: 95% !important;
   background-color: rgba(241, 241, 241, 1); /* Açık gri */
   }
   .offcanvas-backdrop.show {
@@ -637,4 +637,8 @@ font-size: 0.85rem!important;
 
 .btn{
 font-size: 0.75rem!important;
+}
+
+container{
+    max-width:100px;
 }
